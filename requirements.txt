@@ -8,3 +8,4 @@ scikit-learn
 joblib
 flask
 jinja2
+gunicorn
