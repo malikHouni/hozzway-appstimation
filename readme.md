@@ -30,7 +30,7 @@ technos:
     - Plotly (visualisation)
 ---
 ### Partie 3: Re-entrainement de model
-##Possibilité de re entrainer un model en donnant un dataset différent
+## Possibilité de re entrainer un model en donnant un dataset différent
 ---
 ### Page web HOME:
 ![image](./static/images/web01.png)
