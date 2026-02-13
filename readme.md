@@ -1,5 +1,5 @@
 # TP Machine learning et Flask - 2026 - Par Malik HOUNI pour Progess Factory
-### Prof: Baptiste Jauseau
+### Prof: Baptiste
 ![image](./static/images/PF_short.png )
 ---
 ## 🎯 Objectif: Création d'un dashboard interactif avec Python, et Flask
