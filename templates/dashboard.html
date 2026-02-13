@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Dashboard</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <style>
+            body {
+                background-color: #f4f7f6;
+            }
+            .kpi-card {
+                background-color: #fff;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                padding: 1.5rem;
+                text-align: center;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            }
+            .kpi-card h3 {
+                color: #198754;
+                margin-bottom: 0.2rem;
+            }
+            .kpi-card p {
+                color: #6c757d;
+                margin-bottom: 0;
+            }
+            .chart-card {
+                background-color: #fff;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                padding: 1rem;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            }
+            footer {
+                background: #212529;
+                color: white;
+                padding: 2rem 0;
+                margin-top: 3rem;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">TP_ML_Baptise</a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="Dashboard"
+                                >Dashboard</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Training">Training</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Prediction">Prediction</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid mt-4 mb-5 px-4">
+            <h1 class="mb-4">Dashboard - Immobilier Californie</h1>
+
+            <!-- KPIs -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-3">
+                    <div class="kpi-card">
+                        <p>Prix médian</p>
+                        <h3>{{ kpis.prix_median }}</h3>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="kpi-card">
+                        <p>Revenu médian moyen</p>
+                        <h3>{{ kpis.revenu_median }}</h3>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="kpi-card">
+                        <p>Nombre de districts</p>
+                        <h3>{{ kpis.nb_districts }}</h3>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="kpi-card">
+                        <p>Zone la plus chère</p>
+                        <h3>{{ kpis.zone_chere }}</h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ligne 1 : Carte Mapbox (pleine largeur) -->
+            <div class="row g-3 mb-4">
+                <div class="col-12">
+                    <div class="chart-card">{{ fig_mapbox|safe }}</div>
+                </div>
+            </div>
+
+            <!-- Ligne 2 : 3D + Scatter filtrable -->
+            <div class="row g-3 mb-4">
+                <div class="col-lg-6">
+                    <div class="chart-card">{{ fig_3d|safe }}</div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="chart-card">{{ fig_map|safe }}</div>
+                </div>
+            </div>
+
+            <!-- Ligne 3 : Revenu vs Prix + Boxplot -->
+            <div class="row g-3 mb-4">
+                <div class="col-lg-6">
+                    <div class="chart-card">{{ fig_income|safe }}</div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="chart-card">{{ fig_box|safe }}</div>
+                </div>
+            </div>
+
+            <!-- Ligne 4 : Prix moyen par zone + Âge des logements -->
+            <div class="row g-3 mb-4">
+                <div class="col-lg-6">
+                    <div class="chart-card">{{ fig_bar|safe }}</div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="chart-card">{{ fig_age|safe }}</div>
+                </div>
+            </div>
+
+            <!-- Ligne 5 : Matrice de corrélation (pleine largeur) -->
+            <div class="row g-3 mb-4">
+                <div class="col-12">
+                    <div class="chart-card">{{ fig_corr|safe }}</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <div class="container text-center">
+                <p>
+                    &copy; 2026 Malik HOUNI - TP -Progress Factory avec
+                    Bootstrap 5.
+                </p>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

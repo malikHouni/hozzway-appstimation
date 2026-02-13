@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f4f7f6; }
+        .grid-demo {
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .score-card {
+            background-color: #fff;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .score-card h3 { color: #198754; margin-bottom: 0.2rem; }
+        .score-card p { color: #6c757d; margin-bottom: 0; }
+        footer { background: #212529; color: white; padding: 2rem 0; margin-top: 3rem; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="/"><img src={{ url_for('static', filename='/images/HW.png') }} style="width:5em;height:2em;"/> APPSTIMATOR</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="Dashboard">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link active" href="Training">Training</a></li>
+        <li class="nav-item"><a class="nav-link" href="Prediction">Prediction</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5 mb-5">
+    <div class="row g-4">
+        <div class="col-lg-3 col-md-4">
+            <div class="list-group shadow-sm">
+                <img src={{ url_for('static', filename='/images/supportHelp.png') }} style="width:15em;height:15em;"/><br/>
+                <p>💡 Pensez bien à l'extension!</p><p style="text-align: center;">Seulement .csv.</p>
+                <img src="https://www.opc-router.de/wp-content/uploads/2022/11/CSV-gruen-gross@4x.png" style="width:3em;height:3em;margin-left:0;margin-right:0;" />
+            </div>
+        </div>
+
+        <div class="col-lg-9 col-md-8">
+            <div class="grid-demo mb-4">
+                <h1>Réentraînement du modèle(a venir)</h1>
+                <p class="lead">Uploadez un nouveau jeu de données CSV pour ré-entraîner le modèle</p>
+                <hr>
+
+                <!-- Formulaire upload -->
+                <form action="{{ url_for('Training') }}" method="POST" enctype="multipart/form-data">
+                    <div class="row justify-content-center align-items-end g-3">
+                        <div class="col-md-7">
+                            <label for="dataset" class="form-label fw-bold">Fichier CSV</label>
+                            <input type="file" class="form-control" name="dataset" accept=".csv" required>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-primary btn-lg w-100">Lancer l'entraînement</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Message d'erreur -->
+            {% if error %}
+            <div class="alert alert-danger" role="alert">
+                {{ error }}
+            </div>
+            {% endif %}
+
+            <!-- Scores après réentraînement -->
+            {% if scores %}
+            <div class="alert alert-success text-center mb-4" role="alert">
+                <h4>Modèle réentraîné avec succès bravo!</h4>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="score-card">
+                        <p>R² Score</p>
+                        <h3>{{ scores.r2 }}</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="score-card">
+                        <p>RMSE</p>
+                        <h3>{{ scores.rmse }}</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="score-card">
+                        <p>Features</p>
+                        <h3>{{ scores.n_features }}</h3>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="score-card">
+                        <p>Données d'entraînement</p>
+                        <h3>{{ scores.n_train }}</h3>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="score-card">
+                        <p>Données de test</p>
+                        <h3>{{ scores.n_test }}</h3>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container text-center">
+        <p>&copy; 2026 Malik HOUNI - TP -Progress Factory avec Bootstrap 5.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

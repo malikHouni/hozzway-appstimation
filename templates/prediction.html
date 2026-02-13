@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href={{ url_for('static', filename='styles.css') }}>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="/"><img src={{ url_for('static', filename='/images/HW.png') }} style="width:5em;height:2em;"/> APPSTIMATOR</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="Dashboard">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="Training">Training</a></li>
+        <li class="nav-item"><a class="nav-link active" href="Prediction">Prediction</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5 mb-5">
+    <div class="row g-4">
+        <div class="col-lg-3 col-md-4">
+            <div class="list-group shadow-sm">
+                <img src={{ url_for('static', filename='/images/supportHelp.png') }} style="width:15em;height:15em;"/><br/>
+                <p>💡Attention au valeurs que vous mettez!</p>
+            </div>
+        </div>
+
+        <div class="col-lg-9 col-md-8">
+            <div class="grid-demo mb-4">
+                <h1>Prediction</h1>
+                <p class="lead">Renseignez les informations pour obtenir une estimation du prix</p>
+            </div>
+
+            <!-- Résultat de la prédiction -->
+            {% if result %}
+            <div class="alert alert-success text-center mb-4" role="alert">
+                <h2>La prédiction est : ${{ result }}</h2>
+            </div>
+            {% endif %}
+
+            <!-- Formulaire -->
+            <div class="grid-demo">
+                <form action="{{ url_for('prediction') }}" method="POST">
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label for="longitude" class="form-label">Longitude</label>
+                            <input type="number" step="any" class="form-control" name="longitude" placeholder="-122.23" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="latitude" class="form-label">Latitude</label>
+                            <input type="number" step="any" class="form-control" name="latitude" placeholder="37.88" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="housing_median_age" class="form-label">Housing Median Age</label>
+                            <input type="number" step="any" class="form-control" name="housing_median_age" placeholder="41" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="total_rooms" class="form-label">Total Rooms</label>
+                            <input type="number" step="any" class="form-control" name="total_rooms" placeholder="880" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="total_bedrooms" class="form-label">Total Bedrooms</label>
+                            <input type="number" step="any" class="form-control" name="total_bedrooms" placeholder="129" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="population" class="form-label">Population</label>
+                            <input type="number" step="any" class="form-control" name="population" placeholder="322" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="households" class="form-label">Households</label>
+                            <input type="number" step="any" class="form-control" name="households" placeholder="126" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="median_income" class="form-label">Median Income</label>
+                            <input type="number" step="any" class="form-control" name="median_income" placeholder="8.3252" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="ocean_proximity" class="form-label">Ocean Proximity</label>
+                            <select class="form-select" name="ocean_proximity" required>
+                                <option value="<1H OCEAN">&lt;1H OCEAN</option>
+                                <option value="NEAR BAY">NEAR BAY</option>
+                                <option value="INLAND">INLAND</option>
+                                <option value="NEAR OCEAN">NEAR OCEAN</option>
+                                <option value="ISLAND">ISLAND</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 mt-3">
+                            <button type="submit" class="btn btn-primary btn-lg w-100">Prédire le prix</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container text-center">
+        <p>&copy; 2026 Malik HOUNI - TP -Progress Factory avec Bootstrap 5.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
